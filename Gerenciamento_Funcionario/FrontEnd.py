@@ -10,9 +10,9 @@ class Frontend:
         self.window = tk.Tk()
         self.window.title("Login")
         self.window.geometry("800x400")
-        self.window.configure(bg="#f0f0f0")  # Cor de fundo
+        self.window.configure(bg="#f0f0f0")
 
-        # Frame principal alinhado à esquerda
+        # Frame principal
         main_frame = tk.Frame(self.window, bg="#f0f0f0")
         main_frame.pack(fill=tk.BOTH, expand=True, padx=50, pady=50, anchor='nw')
 
