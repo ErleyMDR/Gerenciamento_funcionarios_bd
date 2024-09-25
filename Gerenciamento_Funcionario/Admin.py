@@ -8,7 +8,8 @@ from BackEnd import Database
 
 class Admin:
     def __init__(self):
-        self.db = Database("C:\\Users\\Lucas\\Desktop\\Gerenciamento_Func-main-caio\\gerenciamento_funcionarios.db")
+        from Main import db_path
+        self.db = Database(db_path)
         self.root = tk.Tk()
         self.root.title("Tela de Administração")
         self.root.geometry("800x600")
