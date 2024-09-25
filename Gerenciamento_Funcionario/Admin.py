@@ -11,16 +11,16 @@ class Admin:
         self.db = Database("C:\\Users\\Lucas\\Desktop\\Gerenciamento_Func-main-caio\\gerenciamento_funcionarios.db")
         self.root = tk.Tk()
         self.root.title("Tela de Administração")
-        self.root.geometry("800x600")  # Defina um tamanho inicial maior
+        self.root.geometry("800x600")
         self.root.configure(bg="#f0f0f0")
 
-        # Frame lateral
+        
         frame_menu = tk.Frame(self.root, bg="#273b7a")
-        frame_menu.pack(side="left", fill="y")  # Preenche verticalmente e ocupa o espaço da tela
+        frame_menu.pack(side="left", fill="y") 
 
         # Frame principal
         main_frame = tk.Frame(self.root, bg="#f0f0f0")
-        main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)  # Certifique-se de que o main_frame se expanda
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)  
 
         # Frame para exibir a tabela no topo
         table_frame = tk.Frame(main_frame, bg="#f0f0f0")
@@ -41,7 +41,6 @@ class Admin:
         buttons_frame = tk.Frame(main_frame, bg="#f0f0f0")
         buttons_frame.pack(pady=20)
 
-        # Adicionando botões
         # Coluna de Adicionar
         button_user = tk.Button(buttons_frame, text="Adicionar Funcionário", command=self.open_add_user_window, bg="#339194", fg="white", width=25)
         button_user.grid(row=0, column=0, padx=5, pady=5)
@@ -285,7 +284,7 @@ class AddUserWindow:
         self.admin = admin
         self.window = tk.Toplevel()
         self.window.title("Cadastrar Usuário e Funcionário")
-        self.window.geometry("400x500")  # Aumentei a altura 
+        self.window.geometry("400x500") 
         self.window.configure(bg="#f0f0f0")
 
         # Formulário de Usuário e Funcionário
@@ -368,7 +367,7 @@ class AddUserWindow:
             # Adicionar usuário
             user_id = self.db.add_user(username, hashed_password, role)
             # Adicionar pessoal
-            id_pessoal = self.db.add_pessoal(nome, cpf, telefone=None, data_nascimento=None)  # Ajuste conforme necessário
+            id_pessoal = self.db.add_pessoal(nome, cpf, telefone=None, data_nascimento=None)
             # Adicionar funcionário, associando ao usuário e pessoal
             self.db.add_employee(id_pessoal, email, salario, cargo, id_dep, user_id)
             messagebox.showinfo("Sucesso", "Usuário e Funcionário adicionados com sucesso!")
