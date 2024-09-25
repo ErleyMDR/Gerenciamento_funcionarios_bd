@@ -79,7 +79,6 @@ class Database:
     def delete_pessoal(self, id_pessoal):
         with self.connection as conn:
             cursor = conn.cursor()
-            # Primeiro, deletar de FUNC para manter a integridade referencial
             cursor.execute("DELETE FROM FUNC WHERE ID_NOME = ?", (id_pessoal,))
             cursor.execute("DELETE FROM PESSOAL WHERE ID = ?", (id_pessoal,))
             conn.commit()
