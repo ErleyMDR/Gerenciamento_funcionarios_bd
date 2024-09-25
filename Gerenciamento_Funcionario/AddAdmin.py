@@ -1,10 +1,13 @@
-
+import os.path
 import sqlite3
 from BackEnd import Database
 import bcrypt
 
+Base_Dir = os.path.dirname(__file__)
+db_path = os.path.join(Base_Dir, "gerenciamento_funcionarios.db")
+
 def add_admin():
-    db = Database("C:\\Users\\Lucas\\Desktop\\Gerenciamento_Func-main-caio\\gerenciamento_funcionarios.db")
+    db = Database(db_path)
     
     username = 'admin'
     password = 'masterkey'
