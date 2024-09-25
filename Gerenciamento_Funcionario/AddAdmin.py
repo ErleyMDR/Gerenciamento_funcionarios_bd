@@ -9,15 +9,13 @@ def add_admin():
     username = 'admin'
     password = 'masterkey'
     role = 'admin'
-    
-    # Verificar se o usuário admin já existe
+        
     with db.connection as conn:
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM USERS WHERE USERNAME = ?", (username,))
         admin_exists = cursor.fetchone()
         
         if not admin_exists:
-            # Hash da senha
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
             
             try:
