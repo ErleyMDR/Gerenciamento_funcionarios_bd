@@ -5,8 +5,9 @@ from Admin import Admin
 from User import User
 
 class Frontend:
-    def __init__(self): 
-        self.db = Database("C:\\Users\\Lucas\\Desktop\\Gerenciamento_Func-main-caio\\gerenciamento_funcionarios.db")
+    def __init__(self):
+        from Main import db_path
+        self.db = Database(db_path)
         self.window = tk.Tk()
         self.window.title("Login")
         self.window.geometry("800x400")
