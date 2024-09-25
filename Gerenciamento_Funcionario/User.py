@@ -7,7 +7,8 @@ from BackEnd import Database
 
 class User:
     def __init__(self, user_id):
-        self.db = Database(r"C:\Users\Lucas\Desktop\Gerenciamento_Func-main-caio\gerenciamento_funcionarios.db")
+        from Main import db_path
+        self.db = Database(db_path)
         self.user_id = user_id  # ID do usuário para associar à tabela FUNC
 
         self.root = tk.Tk()
