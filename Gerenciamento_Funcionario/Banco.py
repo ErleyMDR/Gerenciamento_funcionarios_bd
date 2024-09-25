@@ -1,6 +1,6 @@
 import sqlite3
 
-# Conectar ao banco de dados (ou criar um novo se não existir)
+# Conectar ao banco de dados
 conn = sqlite3.connect("C:\\Users\\Lucas\\Desktop\\Gerenciamento_Func-main-caio\\gerenciamento_funcionarios.db")
 
 # Criar um cursor
