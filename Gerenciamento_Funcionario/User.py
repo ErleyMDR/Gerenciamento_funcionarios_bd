@@ -8,18 +8,18 @@ from BackEnd import Database
 class User:
     def __init__(self, user_id):
         self.db = Database(r"C:\Users\Lucas\Desktop\Gerenciamento_Func-main-caio\gerenciamento_funcionarios.db")
-        self.user_id = user_id  # ID do usuário para associar ao FUNC
+        self.user_id = user_id  # ID do usuário para associar à tabela FUNC
 
         self.root = tk.Tk()
         self.root.title("Painel do Usuário")
         self.root.geometry("1000x700")
         self.root.configure(bg="#f0f0f0")
 
-        # Frame principal alinhado à esquerda
+        # Frame principal
         main_frame = tk.Frame(self.root, bg="#f0f0f0")
         main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20, anchor='nw')
 
-        # Frame para Informações Pessoais e Suas Tarefas lado a lado
+        # Frame para Informações Pessoais e Tarefas do Funcionário
         top_frame = tk.Frame(main_frame, bg="#f0f0f0")
         top_frame.grid(row=0, column=0, sticky='nw', padx=10, pady=10)
 
@@ -51,7 +51,7 @@ class User:
         button_update_personal = tk.Button(personal_info_frame, text="Atualizar Informações", command=self.update_personal_info, bg="#4CAF50", fg="white", width=20)
         button_update_personal.grid(row=4, column=0, columnspan=2, pady=10)
 
-        # Tarefas
+        # Tabela de exibição das tarefas
         self.tarefas_tree = ttk.Treeview(tarefas_frame, columns=("ID", "Tarefa"), show="headings")
         self.tarefas_tree.heading("ID", text="ID")
         self.tarefas_tree.heading("Tarefa", text="Tarefa")
@@ -73,7 +73,6 @@ class User:
         buttons_frame = tk.Frame(main_frame, bg="#f0f0f0")
         buttons_frame.grid(row=3, column=0, sticky='nw', padx=10, pady=10)
 
-        # Botões alinhados horizontalmente com cores padronizadas
         button_endereco = tk.Button(buttons_frame, text="Adicionar Endereço", command=self.open_add_endereco_window, bg="#2196F3", fg="white", width=20)
         button_endereco.grid(row=0, column=0, padx=5, pady=5)
 
@@ -121,7 +120,7 @@ class User:
         nome = self.entry_nome.get()
         cpf = self.entry_cpf.get()
         telefone = self.entry_telefone.get()
-        data_nasc = self.entry_data_nasc.get_date().strftime('%Y-%m-%d')  # Formato YYYY-MM-DD
+        data_nasc = self.entry_data_nasc.get_date().strftime('%Y-%m-%d')
 
         # Validação de campos
         if not (nome and cpf):
@@ -153,9 +152,6 @@ class User:
             messagebox.showerror("Erro", "Funcionário associado ao usuário não encontrado.")
 
     def get_id_func(self):
-        # Precisamos obter o IDFUNC do usuário
-        # Supondo que cada usuário está associado a um FUNC via FUNC.USER_ID = USERS.ID
-        # Você pode ajustar conforme a estrutura real do banco de dados
         with self.db.connection as conn:
             cursor = conn.cursor()
             cursor.execute("""
@@ -333,6 +329,4 @@ class UpdateEnderecoWindow:
 
 # Executar a interface do usuário
 if __name__ == "__main__":
-    # Este bloco não será executado quando importado como módulo
-    # Você pode removê-lo se não necessário
     pass
