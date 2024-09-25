@@ -1,8 +1,11 @@
 import sqlite3
+import os.path
+
+Base_Dir = os.path.dirname(__file__)
+db_path = os.path.join(Base_Dir, "gerenciamento_funcionarios.db")
 
 # Conectar ao banco de dados
-conn = sqlite3.connect("C:\\Users\\Lucas\\Desktop\\Gerenciamento_Func-main-caio\\gerenciamento_funcionarios.db")
-
+conn = sqlite3.connect(db_path)
 # Criar um cursor
 cursor = conn.cursor()
 
