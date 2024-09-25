@@ -1,0 +1,59 @@
+
+--departamentos
+INSERT INTO DEPARTAMENTO (NOME) VALUES ('TI')
+INSERT INTO DEPARTAMENTO (NOME) VALUES ('RH')
+INSERT INTO DEPARTAMENTO (NOME) VALUES ('Financeiro')
+INSERT INTO DEPARTAMENTO (NOME) VALUES ('Marketing')
+INSERT INTO DEPARTAMENTO (NOME) VALUES ('Vendas')
+
+
+--cargos
+INSERT INTO PROJETO (NOME, CLIENTE, CARGO) VALUES ('Projeto A', 'Cliente X', 'Gerente de Projeto')
+INSERT INTO PROJETO (NOME, CLIENTE, CARGO) VALUES ('Projeto B', 'Cliente Y', 'Desenvolvedor')
+INSERT INTO PROJETO (NOME, CLIENTE, CARGO) VALUES ('Projeto C', 'Cliente Z', 'Analista')
+INSERT INTO PROJETO (NOME, CLIENTE, CARGO) VALUES ('Projeto D', 'Cliente W', 'Designer')
+INSERT INTO PROJETO (NOME, CLIENTE, CARGO) VALUES ('Projeto E', 'Cliente V', 'Consultor')
+
+
+--endereços
+INSERT INTO ENDEREÇO (ESTADO, CEP, RUA, NUMERO, BAIRRO) VALUES ('São Paulo', '01001000', 'Av. Paulista', '1000', 'Bela Vista')
+INSERT INTO ENDEREÇO (ESTADO, CEP, RUA, NUMERO, BAIRRO) VALUES ('Rio de Janeiro', '20040001', 'Rua da Alfândega', '500', 'Centro')
+INSERT INTO ENDEREÇO (ESTADO, CEP, RUA, NUMERO, BAIRRO) VALUES ('Minas Gerais', '30140071', 'Rua da Bahia', '600', 'Centro')
+INSERT INTO ENDEREÇO (ESTADO, CEP, RUA, NUMERO, BAIRRO) VALUES ('Paraná', '80010030', 'Rua XV de Novembro', '200', 'Centro')
+INSERT INTO ENDEREÇO (ESTADO, CEP, RUA, NUMERO, BAIRRO) VALUES ('Santa Catarina', '88010020', 'Av. Beira-Mar Norte', '800', 'Centro')
+
+-- dados pessoais
+INSERT INTO PESSOAL (NOME, CPF, TEL, ID_END, DATA_NASC) VALUES ('João Silva', '12345678901', '11999999999', 1, '1985-04-15')
+INSERT INTO PESSOAL (NOME, CPF, TEL, ID_END, DATA_NASC) VALUES ('Maria Souza', '23456789012', '21988888888', 2, '1990-07-20')
+INSERT INTO PESSOAL (NOME, CPF, TEL, ID_END, DATA_NASC) VALUES ('Pedro Santos', '34567890123', '31977777777', 3, '1988-03-22')
+INSERT INTO PESSOAL (NOME, CPF, TEL, ID_END, DATA_NASC) VALUES ('Ana Costa', '45678901234', '41966666666', 4, '1995-12-10')
+INSERT INTO PESSOAL (NOME, CPF, TEL, ID_END, DATA_NASC) VALUES ('Carlos Lima', '56789012345', '48955555555', 5, '1982-10-01')
+
+--funcinarios
+INSERT INTO FUNC (ID_NOME, ID_DEP, ID_PROJETO, ID_UNID, EMAIL, SALARIO, CARGO) 
+VALUES (1, 1, 1, 101, 'joao.silva@empresa.com', 5000.00, 'Desenvolvedor')
+INSERT INTO FUNC (ID_NOME, ID_DEP, ID_PROJETO, ID_UNID, EMAIL, SALARIO, CARGO) 
+VALUES (2, 2, 2, 102, 'maria.souza@empresa.com', 4500.00, 'Analista de RH')
+INSERT INTO FUNC (ID_NOME, ID_DEP, ID_PROJETO, ID_UNID, EMAIL, SALARIO, CARGO) 
+VALUES (3, 3, 3, 103, 'pedro.santos@empresa.com', 6000.00, 'Analista Financeiro')
+INSERT INTO FUNC (ID_NOME, ID_DEP, ID_PROJETO, ID_UNID, EMAIL, SALARIO, CARGO) 
+VALUES (4, 4, 4, 104, 'ana.costa@empresa.com', 3500.00, 'Designer Gráfico')
+INSERT INTO FUNC (ID_NOME, ID_DEP, ID_PROJETO, ID_UNID, EMAIL, SALARIO, CARGO) 
+VALUES (5, 5, 5, 105, 'carlos.lima@empresa.com', 7000.00, 'Gerente de Vendas')
+
+
+-- Inserindo 10 tarefas na tabela TAREFAS
+
+INSERT INTO TAREFAS (TAREFA, IDFUNC) VALUES ('Testar a implementação da API de pagamentos', 1);
+INSERT INTO TAREFAS (TAREFA, IDFUNC) VALUES ('Organizar evento de integração dos colaboradores', 2)
+INSERT INTO TAREFAS (TAREFA, IDFUNC) VALUES ('Preparar previsão de orçamento para o próximo ano', 3)
+INSERT INTO TAREFAS (TAREFA, IDFUNC) VALUES ('Desenvolver identidade visual para o novo produto', 4)
+INSERT INTO TAREFAS (TAREFA, IDFUNC) VALUES ('Treinamento da equipe de vendas sobre novo produto', 5)
+
+
+-- tabelas user 
+INSERT INTO usuarios (username, password, role)
+VALUES ('admin', '1234', 'admin')
+
+INSERT INTO usuarios (username, password, role)
+VALUES ('regular', '1234', 'user')

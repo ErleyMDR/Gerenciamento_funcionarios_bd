@@ -1,0 +1,35 @@
+SELECT * from TAREFAS
+
+--relatorios de funcinarios departamento e projetos
+SELECT 
+    P.NOME AS Funcionario,
+    D.NOME AS Departamento,
+    PR.NOME AS Projeto
+FROM FUNC F
+JOIN PESSOAL P ON F.ID_NOME = P.ID_NOME
+JOIN DEPARTAMENTO D ON F.ID_DEP = D.ID_DEP
+JOIN PROJETO PR ON F.ID_PROJETO = PR.ID_PROJ
+
+
+--relatorio de usuarios com endereço
+SELECT 
+    P.NOME AS Funcionario,
+    E.RUA AS Rua,
+    E.NUMERO AS Numero,
+    E.BAIRRO AS Bairro,
+    E.CEP AS CEP,
+    E.ESTADO AS Estado
+FROM PESSOAL P
+JOIN ENDEREÇO E ON P.ID_END = E.ID_END
+
+
+--- relatorio de projetos 
+SELECT 
+    P.NOME AS Funcionario,
+    PR.NOME AS Projeto,
+    T.TAREFA AS Tarefa
+FROM FUNC F
+JOIN PESSOAL P ON F.ID_NOME = P.ID_NOME
+JOIN PROJETO PR ON F.ID_PROJETO = PR.ID_PROJ
+JOIN TAREFAS T ON F.ID = T.IDFUNC
+ORDER BY PR.NOME

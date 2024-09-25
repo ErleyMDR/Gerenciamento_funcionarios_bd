@@ -1,0 +1,149 @@
+-- Criação da tabela DEPARTAMENTO
+CREATE TABLE DEPARTAMENTO (
+    ID_DEP INTEGER PRIMARY KEY AUTOINCREMENT,  -- Necessário ser INTEGER para AUTOINCREMENT
+    NOME VARCHAR(100) NOT NULL
+)
+
+-- Criação da tabela PROJETO
+CREATE TABLE PROJETO (
+    ID_PROJ INTEGER PRIMARY KEY AUTOINCREMENT,  -- Necessário ser INTEGER para AUTOINCREMENT
+    NOME VARCHAR(100) NOT NULL,
+    CLIENTE VARCHAR(100) NOT NULL,
+    CARGO VARCHAR(100) NOT NULL
+)
+
+-- Criação da tabela PESSOAL
+CREATE TABLE PESSOAL (
+    ID_NOME INTEGER PRIMARY KEY AUTOINCREMENT,  -- Necessário ser INTEGER para AUTOINCREMENT
+    NOME VARCHAR(100) NOT NULL,
+    CPF CHAR(11) UNIQUE NOT NULL,
+    TEL VARCHAR(15),
+    ID_END INT, -- Será FK depois
+    DATA_NASC DATE
+)
+
+-- Criação da tabela ENDEREÇO
+CREATE TABLE ENDEREÇO (
+    ID_END INTEGER PRIMARY KEY AUTOINCREMENT,  -- Necessário ser INTEGER para AUTOINCREMENT
+    ESTADO VARCHAR(50) NOT NULL,
+    CEP CHAR(8),
+    RUA VARCHAR(100),
+    NUMERO VARCHAR(10),
+    BAIRRO VARCHAR(50)
+    -- ID_NOME será FK depois
+)
+
+-- Criação da tabela FUNC
+CREATE TABLE FUNC (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,  -- Necessário ser INTEGER para AUTOINCREMENT
+    ID_NOME INTEGER NOT NULL,
+    ID_DEP INTEGER NOT NULL,
+    ID_PROJETO INTEGER NOT NULL,
+    ID_UNID INTEGER, -- Dependendo da implementação, pode ser uma FK para uma tabela UNIDADE
+    EMAIL VARCHAR(100) UNIQUE NOT NULL,
+    SALARIO DECIMAL(10,2) NOT NULL,
+    CARGO VARCHAR(100) NOT NULL,
+    FOREIGN KEY (ID_NOME) REFERENCES PESSOAL(ID_NOME),
+    FOREIGN KEY (ID_DEP) REFERENCES DEPARTAMENTO(ID_DEP),
+    FOREIGN KEY (ID_PROJETO) REFERENCES PROJETO(ID_PROJ)
+)
+
+
+-- Criação da tabela TAREFAS
+CREATE TABLE TAREFAS (
+    IDTASK INTEGER PRIMARY KEY AUTOINCREMENT,  -- Chave primária com autoincremento
+    TAREFA TEXT NOT NULL,                      -- Descrição da tarefa
+    IDFUNC INTEGER NOT NULL,                   -- Chave estrangeira referenciando FUNC
+    FOREIGN KEY (IDFUNC) REFERENCES FUNC(ID)   -- Define o relacionamento com FUNC(ID)
+)
+
+CREATE TABLE IF NOT EXISTS USERS (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL CHECK(role IN ('admin', 'user'))
+)
+
+-----------------------------------------atenção conexao dentro do pyton--------------------------------------------
+import sqlite3 as lite
+
+# Criando conexão
+con = lite.connect('Banco_Func.db')
+
+# Criando tabelas
+with con:
+    cur = con.cursor()
+    
+    # Tabela DEPARTAMENTO
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS DEPARTAMENTO (
+        ID_DEP INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOME TEXT NOT NULL
+    );
+    """)
+
+    # Tabela PESSOAL
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS PESSOAL (
+        ID_NOME INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOME TEXT NOT NULL,
+        CPF TEXT NOT NULL,
+        TEL TEXT NOT NULL,
+        ID_END INTEGER,
+        DATA_NASC DATE,
+        FOREIGN KEY (ID_END) REFERENCES ENDEREÇO(ID_END)
+    );
+    """)
+
+    # Tabela ENDEREÇO
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS ENDEREÇO (
+        ID_END INTEGER PRIMARY KEY AUTOINCREMENT,
+        ESTADO TEXT NOT NULL,
+        CEP TEXT NOT NULL,
+        RUA TEXT NOT NULL,
+        NUMERO TEXT NOT NULL,
+        BAIRRO TEXT NOT NULL,
+        ID_NOME INTEGER,
+        FOREIGN KEY (ID_NOME) REFERENCES PESSOAL(ID_NOME)
+    );
+    """)
+
+    # Tabela PROJETO
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS PROJETO (
+        ID_PROJ INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOME TEXT NOT NULL,
+        CLIENTE TEXT NOT NULL,
+        CARGO TEXT NOT NULL
+    );
+    """)
+
+    # Tabela FUNC
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS FUNC (
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        ID_NOME INTEGER,
+        ID_DEP INTEGER,
+        ID_PROJETO INTEGER,
+        ID_UNID INTEGER,
+        EMAIL TEXT NOT NULL,
+        SALARIO REAL NOT NULL,
+        CARGO TEXT NOT NULL,
+        FOREIGN KEY (ID_NOME) REFERENCES PESSOAL(ID_NOME),
+        FOREIGN KEY (ID_DEP) REFERENCES DEPARTAMENTO(ID_DEP),
+        FOREIGN KEY (ID_PROJETO) REFERENCES PROJETO(ID_PROJ)
+    );
+    """)
+
+    # Tabela TAREFAS
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS TAREFAS (
+        IDTASK INTEGER PRIMARY KEY AUTOINCREMENT,
+        TAREFA TEXT NOT NULL,
+        IDFUNC INTEGER NOT NULL,
+        FOREIGN KEY (IDFUNC) REFERENCES FUNC(ID)
+    );
+    """)
+
+print("Tabelas criadas com sucesso!")
